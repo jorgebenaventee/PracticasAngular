@@ -1,0 +1,13 @@
+@if (funkos?.length) {
+  <div class="grid grid-cols-4 gap-2 w-screen h-screen bg-slate-800 p-3">
+    @for (funko of funkos; track funko.id) {
+      <app-funko [funko]="funko"></app-funko>
+    }
+  </div>
+} @else {
+  <div
+    class="flex flex-col items-center justify-center w-screen h-screen bg-slate-800"
+  >
+    <h1 class="text-4xl text-white">No hay funkos 😟</h1>
+  </div>
+}

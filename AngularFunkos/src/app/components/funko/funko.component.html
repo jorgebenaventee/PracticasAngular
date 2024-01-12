@@ -1,0 +1,14 @@
+<div class="p-6 bg-slate-500">
+  <h3 class="font-bold text-3xl">{{ funko.name }}</h3>
+  <img class="block aspect-auto w-full my-3" [src]="funko.image" alt="" />
+  <div class="grid">
+    <p class="text-black/75 text-sm">
+      Categoría:
+      <span>{{ funko.categoryName }}</span>
+    </p>
+    <span>{{ funko.price | currency: 'EUR' }}</span>
+    <small class="font-semibold">
+      Stock disponible: {{ funko.stock }} unidades
+    </small>
+  </div>
+</div>
