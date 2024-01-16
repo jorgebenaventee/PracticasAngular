@@ -1,0 +1,28 @@
+<div class="flex justify-center">
+  <table>
+    <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Total</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (item of cart; track item.product.id) {
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.product.price |currency:'EUR' }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.product.price * item.quantity | currency:'EUR' }}</td>
+          <td>
+            <button class="text-center w-full">
+              <ng-icon name="tablerTrash" (click)="handleRemoveItem(item)" color="#ff0000" size="1.25rem"></ng-icon>
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

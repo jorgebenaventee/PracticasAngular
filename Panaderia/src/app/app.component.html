@@ -1,0 +1,7 @@
+<div class="max-h-screen h-screen  grid items-center justify-center bg-slate-600">
+  <div class="grid gap-5 h-fit min-h-96 w-fit items-center p-28 justify-center bg-gray-400 rounded">
+    <h1 class="font-semibold text-white text-3xl text-center">Panadería</h1>
+    <app-product-form (formSubmit)="handleFormSubmit($event)"></app-product-form>
+    <app-product-table [cart]="cart" (removeItem)="handleRemoveItem($event)"></app-product-table>
+  </div>
+</div>

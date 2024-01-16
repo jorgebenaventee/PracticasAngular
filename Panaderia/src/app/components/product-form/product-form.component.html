@@ -1,0 +1,26 @@
+<form class="flex gap-8 items-center w-full justify-center" (submit)="handleSubmit($event)">
+  <label class="grid gap-1">
+    <span>Producto</span>
+    <select name="product" class="py-3 px-4 border border-slate-400 rounded w-48" [ngModel]="productValue()"
+            (ngModelChange)="onProductChange($event)">
+      @for (product of products; track product.id) {
+        <option [value]="product.id">{{ product.name }}</option>
+      }
+    </select>
+  </label>
+  <label class="grid gap-1">
+    <span>Precio</span>
+    <input type="number" [disabled]="true" [ngModel]="priceValue()" name="price"
+           class="py-3 px-2 w-32 border border-slate-400 rounded">
+  </label>
+  <label class="grid gap-1">
+    <span>Cantidad</span>
+    <input type="number" [ngModel]="quantityValue()" name="quantity" min="0" (ngModelChange)="onQuantityChange($event)"
+           class="py-3 px-2 w-32 border border-slate-400 rounded">
+  </label>
+  <span class="font-semibold block mt-7 tabular-nums text-white">Total: {{ totalValue() |currency:'EUR' }}</span>
+
+  <button class="bg-sky-600 p-4 text-white rounded self-end disabled:opacity-75" [disabled]="!validForm()">
+    Añadir
+  </button>
+</form>
