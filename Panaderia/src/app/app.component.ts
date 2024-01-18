@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ElementRef, ViewChild } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterOutlet } from '@angular/router'
 import { ProductFormComponent } from './components/product-form/product-form.component'
@@ -18,6 +18,9 @@ import { ProductTableComponent } from './components/product-table/product-table.
 })
 export class AppComponent {
   cart: Cart = []
+  total: number = 0
+
+  @ViewChild('dialog') dialog: ElementRef<HTMLDialogElement>
 
   handleFormSubmit(event: Cart[number]) {
     const existingProduct = this.cart.find(
@@ -28,9 +31,22 @@ export class AppComponent {
     } else {
       this.cart.push(event)
     }
+    this.calculateTotal()
   }
 
   handleRemoveItem(productId: number) {
     this.cart = this.cart.filter(({ product }) => product.id !== productId)
+    this.calculateTotal()
+  }
+
+  showModal() {
+    this.dialog.nativeElement.showModal()
+  }
+
+  private calculateTotal() {
+    this.total = this.cart.reduce(
+      (acc, { product, quantity }) => acc + product.price * quantity,
+      0,
+    )
   }
 }
