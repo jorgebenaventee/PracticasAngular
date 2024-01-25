@@ -1,0 +1,104 @@
+<div class="h-screen w-screen grid place-content-center">
+  <h1 class="text-4xl font-bold">DeJóvenes Leganés</h1>
+  <h2 class="text-2xl font-bold text-center">Únete al club</h2>
+  <form [formGroup]="form">
+    <div class="flex flex-col">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" formControlName="nombre"/>
+      @if (form.get('nombre')?.errors && form.get('nombre')?.touched) {
+        <div class="text-red-500">
+          @if (form.get('nombre')?.errors?.['required']) {
+            <p>El nombre es obligatorio</p>
+          } @else if (form.get('nombre')?.errors?.['minlength']) {
+            <p>El nombre debe tener al menos 5 caracteres</p>
+          }
+        </div>
+      }
+    </div>
+    <div class="flex flex-col">
+      <label for="surname">Apellidos</label>
+      <input type="text" id="surname" formControlName="apellidos"/>
+      @if (form.get('apellidos')?.errors && form.get('apellidos')?.touched) {
+        <div class="text-red-500">
+          @if (form.get('apellidos')?.errors?.['required']) {
+            <p>Los apellidos son obligatorios</p>
+          } @else if (form.get('apellidos')?.errors?.['minlength']) {
+            <p>Los apellidos deben tener al menos 5 caracteres</p>
+          }
+        </div>
+      }
+    </div>
+    <div class="flex flex-col">
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email"/>
+      @if (form.get('email')?.errors && form.get('email')?.touched) {
+        <div class="text-red-500">
+          @if (form.get('email')?.errors?.['required']) {
+            <p>El email es obligatorio</p>
+          } @else if (form.get('email')?.errors?.['email']) {
+            <p>El email debe ser válido</p>
+          }
+        </div>
+      }
+    </div>
+    <!-- dni, archivo, fechaNacimiento, sexo, intereses, codigoPostal, provincia, situacionLaboral, terminos y condiciones    -->
+    <div class="flex flex-col">
+      <label for="dni">DNI</label>
+      <input type="text" id="dni" formControlName="dni"/>
+      @if (form.get('dni')?.errors && form.get('dni')?.touched) {
+        <div class="text-red-500">
+          @if (form.get('dni')?.errors?.['required']) {
+            <p>El DNI es obligatorio</p>
+          } @else if (form.get('dni')?.errors?.['pattern']) {
+            <p>El DNI debe ser válido</p>
+          }
+        </div>
+      }
+    </div>
+    <div class="flex flex-col">
+      <label for="archivo">Archivo</label>
+      <input type="file" formControlName="archivo" id="archivo">
+      @if (form.get('archivo')?.errors && form.get('archivo')?.touched) {
+        <div class="text-red-500">
+          @if (form.get('archivo')?.errors?.['required']) {
+            <p>El archivo es obligatorio</p>
+          }
+        </div>
+      }
+    </div>
+    <div class="flex flex-col">
+      <span>Sexo</span>
+      <div>
+        <input type="radio" name="sexo" id="masculino" value="Hombre">
+        <label for="masculino">Hombre</label>
+      </div>
+      <div>
+        <input type="radio" name="sexo" id="femenino" value="Mujer">
+        <label for="femenino">Mujer</label>
+      </div>
+      @if (form.get('sexo')?.errors && form.get('sexo')?.touched) {
+        <div class="text-red-500">
+          @if (form.get('sexo')?.errors?.['required']) {
+            <p>El sexo es obligatorio</p>
+          }
+        </div>
+      }
+    </div>
+    <div class="flex flex-col">
+      <label for="intereses">Intereses</label>
+      <select name="intereses" id="intereses" formControlName="intereses" multiple>
+        <option value="deporte">Deporte</option>
+        <option value="cine">Cine</option>
+        <option value="musica">Música</option>
+        <option value="tecnologia">Tecnología</option>
+      </select>
+      @if (form.get('intereses')?.errors && form.get('intereses')?.touched) {
+        <div class="text-red-500">
+          @if (form.get('intereses')?.errors?.['required']) {
+            <p>Los intereses son obligatorios</p>
+          }
+        </div>
+      }
+    </div>
+  </form>
+</div>
