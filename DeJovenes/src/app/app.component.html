@@ -1,7 +1,7 @@
 <div class="h-screen w-screen grid place-content-center">
   <h1 class="text-4xl font-bold">DeJóvenes Leganés</h1>
   <h2 class="text-2xl font-bold text-center">Únete al club</h2>
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
     <div class="flex flex-col">
       <label for="name">Nombre</label>
       <input type="text" id="name" formControlName="nombre"/>
@@ -29,6 +29,21 @@
       }
     </div>
     <div class="flex flex-col">
+      <label for="fechaNacimiento">Fecha nacimiento</label>
+      <input type="text" id="fechaNacimiento" formControlName="fechaNacimiento"/>
+      @if (form.get('fechaNacimiento')?.errors && form.get('fechaNacimiento')?.touched) {
+        <div class="text-red-500">
+          @if (form.get('fechaNacimiento')?.errors?.['required']) {
+            <p>La fecha de nacimiento es obligatoria</p>
+          } @else if (form.get('fechaNacimiento')?.errors?.['beforeDate']) {
+            <p>La fecha de nacimiento tiene que ser anterior a hoy</p>
+          } @else if (form.get('fechaNacimiento')?.errors?.['invalidDate']) {
+            <p>La fecha de nacimiento tiene que ser válida</p>
+          }
+        </div>
+      }
+    </div>
+    <div class="flex flex-col">
       <label for="email">Email</label>
       <input type="email" id="email" formControlName="email"/>
       @if (form.get('email')?.errors && form.get('email')?.touched) {
@@ -41,7 +56,6 @@
         </div>
       }
     </div>
-    <!-- dni, archivo, fechaNacimiento, sexo, intereses, codigoPostal, provincia, situacionLaboral, terminos y condiciones    -->
     <div class="flex flex-col">
       <label for="dni">DNI</label>
       <input type="text" id="dni" formControlName="dni"/>
@@ -68,13 +82,15 @@
     </div>
     <div class="flex flex-col">
       <span>Sexo</span>
-      <div>
-        <input type="radio" name="sexo" id="masculino" value="Hombre">
-        <label for="masculino">Hombre</label>
-      </div>
-      <div>
-        <input type="radio" name="sexo" id="femenino" value="Mujer">
-        <label for="femenino">Mujer</label>
+      <div class="flex gap-5">
+        <div>
+          <input type="radio" name="sexo" id="masculino" formControlName="sexo" value="Hombre">
+          <label for="masculino">Hombre</label>
+        </div>
+        <div>
+          <input type="radio" name="sexo" id="femenino" formControlName="sexo" value="Mujer">
+          <label for="femenino">Mujer</label>
+        </div>
       </div>
       @if (form.get('sexo')?.errors && form.get('sexo')?.touched) {
         <div class="text-red-500">
@@ -99,6 +115,38 @@
           }
         </div>
       }
+    </div>
+    <div class="flex flex-col">
+      <label for="cp">Código postal</label>
+      <input type="text" id="cp" formControlName="codigoPostal" (input)="onCodigoPostalChange($event)"/>
+      @if (form.get('codigoPostal')?.errors && form.get('codigoPostal')?.touched) {
+        <div class="text-red-500">
+          @if (form.get('codigoPostal')?.errors?.['required']) {
+            <p>El codigoPostal es obligatorio</p>
+          }
+        </div>
+      }
+    </div>
+    <div class="flex flex-col">
+      <label for="provincia">Provincia</label>
+      <input type="text" id="provincia" formControlName="provincia"/>
+    </div>
+    <div class="flex flex-col">
+      <label for="situacion">Situación laboral</label>
+      <select id="situacion" [disabled]="true" formControlName="situacionLaboral">
+        <option value="Estudiante">Estudiante</option>
+        <option value="En Paro">En Paro</option>
+        <option value="Trabajando">Trabajando</option>
+      </select>
+    </div>
+    <div class="flex gap-2 my-2">
+      <input type="checkbox" id="terminos" formControlName="terminos">
+      <label for="terminos">Acepto los términos y condiciones</label>
+    </div>
+    <div class="flex justify-center py-10">
+      <button [disabled]="this.form.invalid" class="bg-blue-500 p-2 text-white rounded disabled:opacity-75">Enviar
+        formulario
+      </button>
     </div>
   </form>
 </div>
