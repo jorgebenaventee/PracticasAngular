@@ -49,7 +49,7 @@
       <div>
         <mat-form-field>
           <mat-label>Contraseña</mat-label>
-          <input matInput placeholder="Contraseña" formControlName="password">
+          <input matInput type="password" placeholder="Contraseña" formControlName="password">
         </mat-form-field>
         @if (datosPersonalesForm.get('password')?.errors && datosPersonalesForm.get('password')?.touched) {
           @if (datosPersonalesForm.get('password')?.errors?.['required']) {
@@ -62,7 +62,7 @@
       <div>
         <mat-form-field>
           <mat-label>Confirmar contraseña</mat-label>
-          <input matInput placeholder="Confirmar contraseña" formControlName="confirmPassword">
+          <input matInput type="password" placeholder="Confirmar contraseña" formControlName="confirmPassword">
         </mat-form-field>
         @if (datosPersonalesForm.get('confirmPassword')?.errors && datosPersonalesForm.get('confirmPassword')?.touched) {
           @if (datosPersonalesForm.get('confirmPassword')?.errors?.['required']) {
