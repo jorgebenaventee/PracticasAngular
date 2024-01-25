@@ -1,0 +1,13 @@
+<div>
+  <h1>Datos personales</h1>
+  <p>Nombre: {{ data.datosPersonalesForm["nombre"] }}</p>
+  <p>Direccion: {{ data.datosPersonalesForm["direccion"] }}</p>
+  <p>Email: {{ data.datosPersonalesForm["email"] }}</p>
+  <p>Telefono: {{ data.datosPersonalesForm["telefono"] }}</p>
+  <p>Contraseña: {{ data.datosPersonalesForm["password"] }}</p>
+  <hr>
+  <h1>Preferencias</h1>
+  <p>Clases: {{ getClases() }}</p>
+  <p>Sexo: {{ data.preferenciasForm["sexo"] }}</p>
+  <p>Términos aceptados: {{ data.preferenciasForm["terminos"] ? 'Sí' : 'No' }}</p>
+</div>

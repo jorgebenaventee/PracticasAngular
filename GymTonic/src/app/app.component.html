@@ -1,0 +1,118 @@
+<app-header/>
+<mat-stepper [linear]="true">
+  <mat-step label="Datos personales" [stepControl]="datosPersonalesForm">
+    <form [formGroup]="datosPersonalesForm">
+      <div>
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Nombre" formControlName="nombre">
+        </mat-form-field>
+        @if (datosPersonalesForm.get('nombre')?.errors && datosPersonalesForm.get('nombre')?.touched) {
+          <mat-error>El nombre es obligatorio</mat-error>
+        }
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Dirección</mat-label>
+          <input matInput placeholder="Dirección" formControlName="direccion">
+        </mat-form-field>
+        @if (datosPersonalesForm.get('direccion')?.errors && datosPersonalesForm.get('direccion')?.touched) {
+          <mat-error>La dirección es obligatoria</mat-error>
+        }
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Teléfono</mat-label>
+          <input matInput placeholder="Teléfono" formControlName="telefono">
+        </mat-form-field>
+        @if (datosPersonalesForm.get('telefono')?.errors && datosPersonalesForm.get('telefono')?.touched) {
+          @if (datosPersonalesForm.get('telefono')?.errors?.['required']) {
+            <mat-error>El teléfono es obligatorio</mat-error>
+          } @else if (datosPersonalesForm.get('telefono')?.errors?.['pattern']) {
+            <mat-error>El teléfono debe tener 9 dígitos y empezar por 6, 7 o 9</mat-error>
+          }
+        }
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        @if (datosPersonalesForm.get('email')?.errors && datosPersonalesForm.get('email')?.touched) {
+          @if (datosPersonalesForm.get('email')?.errors?.['required']) {
+            <mat-error>El email es obligatorio</mat-error>
+          } @else if (datosPersonalesForm.get('email')?.errors?.['email']) {
+            <mat-error>El email debe ser válido</mat-error>
+          }
+        }
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Contraseña</mat-label>
+          <input matInput placeholder="Contraseña" formControlName="password">
+        </mat-form-field>
+        @if (datosPersonalesForm.get('password')?.errors && datosPersonalesForm.get('password')?.touched) {
+          @if (datosPersonalesForm.get('password')?.errors?.['required']) {
+            <mat-error>La contraseña es obligatoria</mat-error>
+          } @else if (datosPersonalesForm.get('password')?.errors?.['minlength']) {
+            <mat-error>La contraseña debe tener al menos 8 caracteres</mat-error>
+          }
+        }
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Confirmar contraseña</mat-label>
+          <input matInput placeholder="Confirmar contraseña" formControlName="confirmPassword">
+        </mat-form-field>
+        @if (datosPersonalesForm.get('confirmPassword')?.errors && datosPersonalesForm.get('confirmPassword')?.touched) {
+          @if (datosPersonalesForm.get('confirmPassword')?.errors?.['required']) {
+            <mat-error>La confirmación de la contraseña es obligatoria</mat-error>
+          } @else if (datosPersonalesForm.get('confirmPassword')?.errors?.['match']) {
+            <mat-error>Las contraseñas deben coincidir</mat-error>
+          }
+        }
+      </div>
+      <div>
+        <button mat-raised-button color="primary" matStepperNext [disabled]="datosPersonalesForm.invalid">Continuar
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step label="Preferencias" [stepControl]="preferenciasForm">
+    <form [formGroup]="preferenciasForm">
+      <div>
+        <mat-form-field>
+          <mat-label>Clases</mat-label>
+          <mat-select multiple formControlName="clases">
+            <mat-option value="Pilates">Pilates</mat-option>
+            <mat-option value="Fitness">Fitness</mat-option>
+            <mat-option value="Crossfit">Crossfit</mat-option>
+          </mat-select>
+        </mat-form-field>
+        @if (preferenciasForm.get('color')?.errors && preferenciasForm.get('color')?.touched) {
+          <mat-error>El color es obligatorio</mat-error>
+        }
+      </div>
+      <div>
+        <p>Sexo</p>
+        <mat-radio-group formControlName="sexo">
+          <mat-radio-button value="Hombre">Hombre</mat-radio-button>
+          <mat-radio-button value="Mujer">Mujer</mat-radio-button>
+        </mat-radio-group>
+        @if (preferenciasForm.get('sexo')?.errors && preferenciasForm.get('sexo')?.touched) {
+          <mat-error>El sexo es obligatorio</mat-error>
+        }
+      </div>
+      <div>
+        <mat-checkbox formControlName="terminos">Acepto los términos y condiciones</mat-checkbox>
+        @if (preferenciasForm.get('terminos')?.errors && preferenciasForm.get('terminos')?.touched) {
+          <mat-error>Debes aceptar los términos y condiciones</mat-error>
+        }
+      </div>
+      <div>
+        <button mat-raised-button color="primary" matStepperNext [disabled]="preferenciasForm.invalid" (click)="openDialog()">Continuar
+        </button>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>
