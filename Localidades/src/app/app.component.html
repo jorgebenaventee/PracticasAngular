@@ -1,0 +1,27 @@
+<div
+  style="display: flex; flex-direction: column; gap: 10vh; height: 100vh; width: 100vw; align-items: center; justify-content: center;">
+  <mat-form-field>
+    <mat-label>Comunidades</mat-label>
+    <mat-select (selectionChange)="onComunidadChange($event)">
+      @for (comunidad of comunidades; track comunidad.label) {
+        <mat-option value="{{comunidad.code}}">{{ comunidad.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Provincias</mat-label>
+    <mat-select (selectionChange)="onProvinciaChange($event)">
+      @for (provincia of provincias; track provincia.label) {
+        <mat-option value="{{provincia.code}}">{{ provincia.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Municipios</mat-label>
+    <mat-select>
+      @for (municipio of localidades; track municipio.label) {
+        <mat-option value="{{municipio.code}}">{{ municipio.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>

@@ -15,7 +15,6 @@ type Form = {
 export class ResultDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { datosPersonalesForm: Form, preferenciasForm: Form }) {
-    console.log(data)
   }
 
 
