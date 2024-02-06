@@ -1,1 +1,56 @@
+h1 {
+  text-align: center;
+  width: 100%;
+}
 
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+  margin: auto;
+}
+
+img {
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 16px;
+  margin: auto;
+  display: block;
+}
+
+.image-div {
+  padding: 0 1rem;
+  max-width: 1000px;
+}
+
+.datos-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.articulos-form {
+  display: flex;
+  gap: 1vw;
+  align-items: baseline;
+  justify-content: center;
+}
+
+
+.email-field {
+  grid-column: span 2;
+}
+
+
+ul {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 1vh;
+  font-size: 1.1rem;
+  font-weight: 500;
+  list-style: none;
+}

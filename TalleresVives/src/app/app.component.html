@@ -1,5 +1,187 @@
-<div (click)="log($event)">
-  Hola! Soy el componente principal
+<h1>DATOS CLIENTE</h1>
+<div class="form-container">
+  <div class="image-div">
+    <img src="assets/guido.webp">
+  </div>
+  <form [formGroup]="datosForm" class="datos-form">
+    <mat-form-field>
+      <mat-label>Número de factura</mat-label>
+      <input matInput formControlName="numeroFactura" />
+      @if (datosForm.get('numeroFactura')?.hasError('minlength')) {
+      <mat-error>El número de factura debe tener al menos 5 caracteres</mat-error>
+      } @else if (datosForm.get('numeroFactura')?.hasError('required')) {
+      <mat-error>El número de factura es requerido</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fecha de factura</mat-label>
+      <input matInput formControlName="fecha" [matDatepicker]="picker">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      @if (datosForm.get('fecha')?.hasError('required')) {
+      <mat-error>La fecha de factura es requerida</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nombre del cliente</mat-label>
+      <input matInput formControlName="nombreCliente" />
+      @if (datosForm.get('nombreCliente')?.hasError('required')) {
+      <mat-error>El nombre del cliente es requerido</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Dirección</mat-label>
+      <input matInput formControlName="direccion" />
+      @if (datosForm.get('direccion')?.hasError('required')) {
+      <mat-error>La dirección es requerida</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Código postal</mat-label>
+      <input matInput formControlName="codigoPostal" (input)="onCodigoPostalChange()"/>
+      @if (datosForm.get('codigoPostal')?.hasError('required')) {
+      <mat-error>El código postal es requerido</mat-error>
+      } @else if (datosForm.get('codigoPostal')?.hasError('pattern')) {
+      <mat-error>El código postal debe tener 5 dígitos</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Provincia</mat-label>
+      <input matInput formControlName="provincia" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ciudad</mat-label>
+      <input matInput formControlName="ciudad" />
+      @if (datosForm.get('ciudad')?.hasError('required')) {
+      <mat-error>La ciudad es requerida</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Teléfono</mat-label>
+      <input matInput formControlName="telefono" />
+      @if (datosForm.get('telefono')?.hasError('required')) {
+      <mat-error>El teléfono es requerido</mat-error>
+      } @else if (datosForm.get('telefono')?.hasError('pattern')) {
+      <mat-error>El teléfono debe tener 9 dígitos y empezar por 6, 7 o 9</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tipo de documento</mat-label>
+      <mat-select formControlName="tipoDocumento">
+        <mat-option value="DNI">DNI</mat-option>
+        <mat-option value="NIE">NIE</mat-option>
+        <mat-option value="CIF">CIF</mat-option>
+      </mat-select>
+      @if (datosForm.get('tipoDocumento')?.hasError('required')) {
+      <mat-error>El tipo de documento es requerido</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Número de documento</mat-label>
+      <input matInput formControlName="documento" />
+      @if (datosForm.get('documento')?.hasError('required')) {
+      <mat-error>El número de documento es requerido</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="email-field">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput formControlName="email" />
+      @if (datosForm.get('email')?.hasError('required')) {
+      <mat-error>El correo electrónico es requerido</mat-error>
+      } @else if (datosForm.get('email')?.hasError('email')) {
+      <mat-error>El correo electrónico no es válido</mat-error>
+      }
+    </mat-form-field>
+  </form>
 </div>
-<router-outlet>
-</router-outlet>
+
+<hr>
+
+<h1>DETALLES FACTURA</h1>
+<form [formGroup]="articulosForm" (ngSubmit)="addArticulo()" class="articulos-form">
+  <mat-form-field>
+    <mat-label>Artículo</mat-label>
+    <input matInput formControlName="articulo" />
+    @if (articulosForm.get('articulo')?.hasError('required')) {
+    <mat-error>El artículo es requerido</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Precio</mat-label>
+    <input matInput formControlName="precio" />
+    @if (articulosForm.get('precio')?.hasError('required')) {
+    <mat-error>El precio es requerido</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Cantidad</mat-label>
+    <input matInput formControlName="cantidad" />
+    @if (articulosForm.get('cantidad')?.hasError('required')) {
+    <mat-error>La cantidad es requerida</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Tipo IVA</mat-label>
+    <mat-select formControlName="tipoIva">
+      <mat-option value="0.21">21%</mat-option>
+      <mat-option value="0.10">10%</mat-option>
+      <mat-option value="0.04">4%</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button [disabled]="articulosForm.invalid">Agregar artículo</button>
+</form>
+
+<table mat-table [dataSource]="articulos">
+
+  <ng-container matColumnDef="linea">
+    <th mat-header-cell *matHeaderCellDef> Línea </th>
+    <td mat-cell *matCellDef="let articulo"> {{articulo.linea}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="articulo">
+    <th mat-header-cell *matHeaderCellDef> Artículo </th>
+    <td mat-cell *matCellDef="let articulo"> {{articulo.articulo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="precio">
+    <th mat-header-cell *matHeaderCellDef> Precio </th>
+    <td mat-cell *matCellDef="let articulo"> {{articulo.precio | currency:'EUR'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cantidad">
+    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+    <td mat-cell *matCellDef="let articulo"> {{articulo.cantidad}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tipoIva">
+    <th mat-header-cell *matHeaderCellDef> Tipo IVA </th>
+    <td mat-cell *matCellDef="let articulo"> {{articulo.tipoIva}}% </td>
+  </ng-container>
+
+  <ng-container matColumnDef="iva">
+    <th mat-header-cell *matHeaderCellDef> IVA </th>
+    <td mat-cell *matCellDef="let articulo"> {{articulo.iva | currency:'EUR'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef> Total </th>
+    <td mat-cell *matCellDef="let articulo"> {{articulo.total | currency:'EUR'}} <span style="color:red; cursor: pointer" (click)="borrarArticulo(articulo)">Borrar</span> </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+</table>
+
+<hr>
+<h1>Totales</h1>
+<ul>
+  <li>Base imponible 21%: {{totales.baseImponible21 | currency:'EUR'}}</li>
+  <li>IVA 21%: {{totales.iva21 | currency:'EUR'}}</li>
+  <li>Base imponible 10%: {{totales.baseImponible10 | currency:'EUR'}}</li>
+  <li>IVA 10%: {{totales.iva10 | currency:'EUR'}}</li>
+  <li>Base imponible 10%: {{totales.baseImponible10 | currency:'EUR'}}</li>
+  <li>IVA 10%: {{totales.iva10 | currency:'EUR'}}</li>
+  <li>Base imponible 4%: {{totales.baseImponible4 | currency:'EUR'}}</li>
+  <li>IVA 4%: {{totales.iva4 | currency:'EUR'}}</li>
+</ul>
+
+<button mat-raised-button style="display: block; margin: 5vh auto" [disabled]="articulos.length === 0 || datosForm.invalid" (click)="showDialog()">Enviar</button>

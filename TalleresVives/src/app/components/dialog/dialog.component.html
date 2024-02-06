@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Confirmación datos</h2>
+<mat-dialog-content>
+  <p>Número de factura: {{data.datos.numeroFactura}}</p>
+  <p>Fecha: {{data.datos.fecha}}</p>
+  <p>Cliente: {{data.datos.nombreCliente}}</p>
+  <p>Dirección: {{data.datos.direccion}}</p>
+  <p>Código postal: {{data.datos.codigoPostal}}</p>
+  <p>Provincia: {{data.datos.provincia}}</p>
+  <p>Ciudad: {{data.datos.ciudad}}</p>
+  <p>Teléfono: {{data.datos.telefono}}</p>
+  <p>Tipo documento: {{data.datos.tipoDocumento}}</p>
+  <p>Documento: {{data.datos.documento}}</p>
+  <p>Email: {{data.datos.email}}</p>
+  <hr />
+  @for(articulo of data.articulos; track articulo.linea) {
+  <p>{{articulo.articulo}} - {{articulo.precio | currency:'EUR'}} x {{articulo.cantidad}} = {{articulo.total | currency:'EUR'}}</p>
+  }
+</mat-dialog-content>
